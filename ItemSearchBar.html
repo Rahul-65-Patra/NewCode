@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Item Search Bar</title>
+    <style>
+    
+        body {
+            font-family: Arial, sans-serif;
+            padding: 20px;
+        }
+        .search-container {
+            margin-bottom: 20px;
+        }
+        .search-input {
+            padding: 10px;
+            width: 100%;
+            max-width: 400px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        .results-list {
+            list-style: none;
+            padding: 0;
+        }
+        .results-item {
+            padding: 10px;
+            border-bottom: 1px solid #ccc;
+        }
+        .results-item:last-child {
+            border-bottom: none;
+        }
+    </style>
+</head>
+<body>
+
+<div class="search-container">
+    <input type="text" id="searchInput" class="search-input" placeholder="Search for an item...">
+</div>
+
+<ul id="resultsList" class="results-list">
+    <!-- Search results will appear here -->
+</ul>
+
+<script>
+  // Example data array
+const items = [
+    "Apple",
+    "Banana",
+    "Cherry",
+    "Date",
+    "Elderberry",
+    "Fig",
+    "Grape",
+    "Honeydew",
+    "Kiwi",
+    "Lemon",
+    "Mango",
+    "Nectarine",
+    "Orange",
+    "Papaya",
+    "Quince",
+    "Raspberry",
+    "Strawberry",
+    "Tomato",
+    "Ugli fruit",
+    "Watermelon"
+];
+
+
+const searchInput = document.getElementById('searchInput');
+const resultsList = document.getElementById('resultsList');
+
+function searchItems() {
+    const query = searchInput.value.toLowerCase(); 
+    resultsList.innerHTML = ''; 
+
+   
+    const filteredItems = items.filter(item => item.toLowerCase().includes(query));
+
+   
+    filteredItems.forEach(item => {
+        const li = document.createElement('li');
+        li.textContent = item;
+        li.classList.add('results-item');
+        resultsList.appendChild(li);
+    });
+}
+
+
+searchInput.addEventListener('input', searchItems);
+
+</script>
+
+</body>
+</html>

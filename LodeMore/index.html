@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Load More Button</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 20px;
+    }
+    .item {
+      background-color: #f1f1f1;
+      padding: 10px;
+      margin: 10px 0;
+      border-radius: 5px;
+    }
+    #loadMoreBtn {
+      padding: 10px 20px;
+      background-color: #007bff;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+    #loadMoreBtn:hover {
+      background-color: #0056b3;
+    }
+  </style>
+</head>
+<body>
+
+  <h2>Load More Button</h2>
+  
+  <div id="itemsContainer">
+  </div>
+
+  <button id="loadMoreBtn" onclick="loadMore()">Load More</button>
+
+  <script>
+    let currentIndex = 0;
+    const itemsPerPage = 5;
+    const items = [
+      "Item 1", "Item 2", "Item 3", "Item 4", "Item 5",
+      "Item 6", "Item 7", "Item 8", "Item 9", "Item 10",
+      "Item 11", "Item 12", "Item 13", "Item 14", "Item 15"
+    ];
+
+    function loadMore() {
+      const container = document.getElementById('itemsContainer');
+      for (let i = currentIndex; i < currentIndex + itemsPerPage && i < items.length; i++) {
+        const itemDiv = document.createElement('div');
+        itemDiv.classList.add('item');
+        itemDiv.textContent = items[i];
+        container.appendChild(itemDiv);
+      }
+      currentIndex += itemsPerPage;
+      
+      if (currentIndex >= items.length) {
+        document.getElementById('loadMoreBtn').style.display = 'none';
+      }
+    }
+    window.onload = function() {
+      loadMore();
+    }
+  </script>
+
+</body>
+</html>

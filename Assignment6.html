@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>User Cards</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+      background-color: #f0f0f0;
+    }
+    .dataStore {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 20px;
+      justify-content: center;
+    }
+    .card {
+      background: white;
+      border-radius: 10px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      overflow: hidden;
+      width: 210px;
+      text-align: center;
+      padding: 10px;
+      box-sizing: border-box;
+    }
+    .card:hover{
+      box-shadow: 0 5px 16px 0 rgba(0, 0, 0, 0.5);
+      transition: 0.3s;
+      background-color: rgb(219, 193, 244);
+    }
+    .card img {
+      width: 100px;
+      height: 100px;
+      border-radius: 50%;
+      object-fit: cover;
+      margin-top: 15px;
+    }
+    .card h1 {
+      font-size: 1.2em; 
+      margin: 10px 0;
+    }
+    .card p {
+      margin: 0;
+      color: #555;
+    }
+  </style>
+</head>
+<body>
+  <div class="dataStore"></div>
+  <script>
+    async function fetchData() {
+        let res = await fetch("https://reqres.in/api/users?page=2");
+        if (!res.ok) throw new Error('Network response was not ok');
+        let data = await res.json();
+        let storeValue = data.data.map((item) => {
+          return `
+            <div class="card">
+              <h1>${item.first_name} ${item.last_name}</h1>
+              <p>${item.email}</p>
+              <img src="${item.avatar}" alt="${item.first_name} ${item.last_name}">
+            </div>
+          `;
+        }).join("");
+        document.querySelector(".dataStore").innerHTML = storeValue;
+      } 
+    fetchData();
+  </script>
+</body>
+</html> 
+
+
+
+
+
+

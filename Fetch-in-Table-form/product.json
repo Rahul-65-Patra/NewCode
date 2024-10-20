@@ -1,0 +1,35 @@
+{
+    "products": [
+      {
+        "category": "Electronics",
+        "success": true,
+        "name": "Smartphone"
+      },
+      {
+        "category": "Electronics",
+        "success": true,
+        "name": "Laptop"
+      },
+      {
+        "category": "Home Appliances",
+        "success": false,
+        "name": "Washing Machine"
+      },
+      {
+        "category": "Home Appliances",
+        "success": true,
+        "name": "Refrigerator"
+      },
+      {
+        "category": "Fashion",
+        "success": true,
+        "name": "T-Shirt"
+      },
+      {
+        "category": "Fashion",
+        "success": false,
+        "name": "Jeans"
+      }
+    ]
+  }
+  

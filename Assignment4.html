@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registration Form</title>
+    <style>
+    
+      .container{
+        max-width: 600px;
+        margin: 0 auto;
+        padding: 20px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        background-color: #f9f9f9;
+      }
+      .container h1{
+        text-align: center;
+      }
+.error-message {
+    color: red;
+    font-size: 0.875em;
+    display: block;
+    margin-top: 5px;
+}
+
+.success-message {
+    color: green;
+    font-size: 1em;
+    margin-top: 15px;
+}
+
+.form-control {
+    width: 100%;
+    padding: 10px;
+    box-sizing: border-box;
+}
+#registerButton{
+  margin-top: 15px;
+  padding: 10px;
+  background-color: #4CAF50;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+    </style>
+</head>
+<body>
+    <div class="container mt-2">
+        <h1>Registration Form</h1>
+        <form id="registrationForm">
+            <div class="form-group row">
+                <div class="col">
+                    <label for="username">Username:</label>
+                    <input id="username" type="text" class="form-control">
+                    <span id="usernameError" class="error-message"></span>
+                </div>
+            </div>
+            <div class="form-group row">
+                <div class="col">
+                    <label for="password">Password:</label>
+                    <input id="password" type="password" class="form-control">
+                    <span id="passwordError" class="error-message"></span>
+                </div>
+            </div>
+            <div class="form-group row">
+                <div class="col">
+                    <label for="confirmPassword">Confirm Password:</label>
+                    <input id="confirmPassword" type="password" class="form-control">
+                    <span id="confirmPasswordError" class="error-message"></span>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col">
+                    <button id="registerButton" class="btn btn-primary btn-block" disabled>
+                        Register
+                    </button>
+                </div>
+            </div>
+        </form>
+        <div id="successMessage" class="success-message"></div>
+    </div>
+    <script>
+     
+document.addEventListener('DOMContentLoaded', () => {
+    const form = document.getElementById('registrationForm');
+    const usernameInput = document.getElementById('username');
+    const passwordInput = document.getElementById('password');
+    const confirmPasswordInput = document.getElementById('confirmPassword');
+    const registerButton = document.getElementById('registerButton');
+    const usernameError = document.getElementById('usernameError');
+    const passwordError = document.getElementById('passwordError');
+    const confirmPasswordError = document.getElementById('confirmPasswordError');
+    const successMessage = document.getElementById('successMessage');
+
+    function validateForm() {
+        let isValid = true;
+
+        // Validate username
+        if (usernameInput.value.trim() === '') {
+            usernameError.textContent = 'Username is required.';
+            isValid = false;
+        } else {
+            usernameError.textContent = '';
+        }
+
+        // Validate password
+        if (passwordInput.value.trim() === '') {
+            passwordError.textContent = 'Password is required.';
+            isValid = false;
+        } else {
+            passwordError.textContent = '';
+        }
+
+        // Validate confirm password
+        if (confirmPasswordInput.value.trim() === '') {
+            confirmPasswordError.textContent = 'Confirm Password is required.';
+            isValid = false;
+        } else if (confirmPasswordInput.value !== passwordInput.value) {
+            confirmPasswordError.textContent = 'Passwords do not match.';
+            isValid = false;
+        } else {
+            confirmPasswordError.textContent = '';
+        }
+
+        // Enable or disable register button
+        registerButton.disabled = !isValid;
+
+        return isValid;
+    }
+
+    // Attach event listeners to inputs
+    usernameInput.addEventListener('input', validateForm);
+    passwordInput.addEventListener('input', validateForm);
+    confirmPasswordInput.addEventListener('input', validateForm);
+
+    // Handle form submission
+    form.addEventListener('submit', (event) => {
+        event.preventDefault();
+        if (validateForm()) {
+            successMessage.textContent = 'Registration successful!';
+            form.reset();
+            registerButton.disabled = true;
+        }
+    });
+});
+
+    </script>
+</body>
+</html>

@@ -1,0 +1,17 @@
+[
+  {
+      "title": "Complete assignment",
+      "id": 1,
+      "status": "pending"
+  },
+  {
+      "title": "Read a book",
+      "id": 2,
+      "status": "completed"
+  },
+  {
+      "title": "Write a blog post",
+      "id": 3,
+      "status": "pending"
+  }
+]

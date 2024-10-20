@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<style>
+  table{
+    border-collapse: collapse;
+    width: 50%;
+  }
+  th, td{
+    border: 1px solid black;
+    padding: 8px;
+    text-align: left;
+  }
+  th{
+    background-color: #f2f2f2;
+  }
+  a{
+    text-decoration: none;
+    color: blue;
+    font-weight: bold;
+    font-size: large;
+  }
+</style>
+<body>
+  <h1>EJS Show Data</h1>
+
+    <button><a href="/add">Add Record</a></button><br><br>
+
+    <table >
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Name</th>
+          <th>Age</th>
+          <th>View Data</th>
+          <th>Update Data</th>
+          <th>Delete Data</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% data.forEach((item)=>{  %>
+            <tr>
+              <td><%=item._id%></td>
+              <td><%=item.name%></td>
+              <td><%=item.age%></td>
+              <td><a href="/viewData/<%=item._id%>">View</a></td>
+              <td><a href="/updateData/<%=item._id%>">Update</a></td>
+              <td><a href="/deleteData/<%=item._id%>">Delete</a></td>
+            </tr>
+       <% }) %>
+      </tbody>
+    </table>
+</body>
+</html>

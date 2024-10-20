@@ -1,0 +1,120 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stopwatch</title>
+    <style>
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+    background-color: #f0f0f0;
+    font-family: Arial, sans-serif;
+  
+}
+
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    border: 2px solid black;
+    border-radius: 5px;
+    box-sizing: border-box;
+}
+
+.stopwatch {
+    text-align: center;
+}
+
+#display {
+    font-size: 2em;
+    margin-bottom: 20px;
+}
+
+.controls button {
+    font-size: 1em;
+    padding: 10px 20px;
+    margin: 5px;
+    cursor: pointer;
+    border-radius: 5px;
+}
+.controls button:hover{
+  background-color:aquamarine;
+}
+
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="stopwatch">
+            <div id="display">00:00:00</div>
+            <div class="controls">
+                <button id="start">Start</button>
+                <button id="pause">Pause</button>
+                <button id="reset">Reset</button>
+            </div>
+        </div>
+    </div>
+    <script>
+      // script.js
+let startTime, updatedTime, difference, tInterval;
+let running = false;
+let hours = 0;
+let minutes = 0;
+let seconds = 0;
+
+const display = document.getElementById('display');
+const startButton = document.getElementById('start');
+const pauseButton = document.getElementById('pause');
+const resetButton = document.getElementById('reset');
+
+function startTimer() {
+    if (!running) {
+        running = true;
+        startTime = new Date().getTime();
+        tInterval = setInterval(getShowTime, 1);
+    }
+}
+
+function pauseTimer() {
+    if (running) {
+        running = false;
+        clearInterval(tInterval);
+    }
+}
+
+function resetTimer() {
+    running = false;
+    clearInterval(tInterval);
+    hours = minutes = seconds = 0;
+    display.innerHTML = '00:00:00';
+}
+
+function getShowTime() {
+    updatedTime = new Date().getTime();
+    difference = updatedTime - startTime;
+    
+    hours = Math.floor((difference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+    minutes = Math.floor((difference % (1000 * 60 * 60)) / (1000 * 60));
+    seconds = Math.floor((difference % (1000 * 60)) / 1000);
+    
+    hours = (hours < 10) ? '0' + hours : hours;
+    minutes = (minutes < 10) ? '0' + minutes : minutes;
+    seconds = (seconds < 10) ? '0' + seconds : seconds;
+    
+    display.innerHTML = hours + ':' + minutes + ':' + seconds;
+}
+
+startButton.addEventListener('click', startTimer);
+pauseButton.addEventListener('click', pauseTimer);
+resetButton.addEventListener('click', resetTimer);
+
+    </script>
+</body>
+</html>

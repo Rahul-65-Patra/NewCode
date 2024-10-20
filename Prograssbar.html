@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+   
+   .container{
+      background-color: aqua;
+      height: 30px;
+    }
+    .progressbar {
+      background-color: palevioletred;
+      height: 30px;
+      color: white;
+      width: 0; 
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+  
+   
+   
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="progressbar"></div>
+  </div>
+
+
+ 
+    
+  <script>
+    function startProgress() {
+      const progressBar = document.querySelector(".progressbar");
+      let width = 0;
+
+      //let set = 2*60*1000/100 ;   // Set time 
+
+      let time = setInterval(progress, 100);
+
+      function progress() {
+        if (width >= 100) {
+          clearInterval(time);
+        }
+         else {
+          width++;
+          progressBar.style.width = width + "%";
+          progressBar.textContent = width + "%"; 
+        }
+      }
+    }
+
+    startProgress();
+  </script>
+</body>
+</html>

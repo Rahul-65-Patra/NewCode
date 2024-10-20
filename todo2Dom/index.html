@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Todo Tasks</title>
+    <style>
+        .task {
+            border: 1px solid #ccc;
+            padding: 10px;
+            margin: 10px 0;
+        }
+        .completed {
+            background-color: #d4edda;
+        }
+        .pending {
+            background-color: #f8d7da;
+        }
+    </style>
+</head>
+<body>
+    <h1>Todo List</h1>
+    <div id="taskList"></div>
+
+    <script>
+
+       async function getFun() {
+            try {
+                const response = await fetch('/GetTodo');
+                const tasks = await response.json();
+                const taskListDiv = document.getElementById('taskList');
+                
+                
+                tasks.forEach(task=>{
+                  const newDiv = document.createElement('div');
+                  newDiv.className = `task ${task.status}`;
+                  newDiv.innerHTML = `
+                  <h3>Title: ${task.title}</h3>
+                  <p>Task ID: ${task.id}</p>
+                  <p>Status: ${task.status}</p>
+                  ` ;
+                  taskListDiv.appendChild(newDiv);
+                })
+                
+                
+            } 
+            catch (error) {
+                console.error('Error fetching tasks:', error);
+            }
+        };
+        getFun();
+    </script>
+</body>
+</html>

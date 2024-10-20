@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pomodoro Clock</title>
+  <style>
+    body{
+      background-color: aqua;
+      position: absolute;
+      top:50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+    }
+    .container{
+      border: 1px solid black;
+      width:320px;
+      height:580px;
+      background-color:rgb(159, 147, 151);
+      border-radius: 5px;
+      box-shadow: 0 4px 8px rgb(0,0,0,0.8);
+    }
+    .display{
+      border: 1px solid black;
+      margin:20px 25px;
+      text-align: center;
+      font-size: 50px;
+      width:250px;
+      height: 250px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background-color: white;
+      border-radius: 5px;
+      box-shadow: 0 2px 6px rgb(0,0,0,0.8);
+      font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+      border: 12px solid skyblue;
+    }
+    h2{
+      text-align: center;
+      color:white;
+    }
+    .set{
+      display:flex;
+      justify-content: space-between;
+      margin: 15px;
+      text-align: center;
+      margin-top:-15px;
+    }
+    p{
+      color: white;
+      font-size: 18px;
+      font-weight: 400;
+    }
+    .session h3{
+      color:rgb(44, 44, 146);
+    }
+    .break h3{
+      color:rgb(156, 34, 34);
+    }
+    .session button,.break button{
+        padding:3px 15px;
+        font-weight: 700;
+        font-size: 15px;
+        cursor: pointer;
+        background-color:chocolate;
+        color: white;
+        border: none;
+        border-radius: 4px;
+    }
+    .cbtn{
+      display: flex;
+      justify-content: space-around;
+    }
+    .btn{
+      margin-top:20px;
+      padding:10px 20px;
+      background-color: chocolate;
+      border: none;
+      color:white;
+      border-radius:5px ;
+      font-size: 15px;
+      background-color: 1px solid black;
+      cursor: pointer;
+    }
+    hr{
+      width:90%;
+      border:2px dotted white;
+    }
+  </style>
+</head>
+<body>
+  
+  <div class="container">
+    <div class="display">25:00</div>
+    <h2>Session</h2>
+    <hr>
+    <div class="set">
+      <div class="session">
+        <p>session time</p>
+        <h3>25 min</h3>
+        <button class="session-decrement">-</button>
+        <button class="session-increment">+</button>
+      </div>
+      <div class="break">
+        <p>break time</p>
+        <h3>5 min</h3>
+        <button class="break-decrement">-</button>
+        <button class="break-increment">+</button>
+      </div>
+    </div>
+    <hr>
+    <div class="cbtn">
+      <button class="btn start-pause">Start</button>
+      <button class="btn reset">Reset</button>
+    </div>
+  </div>
+
+  <script>
+    let sessionTime = 20;
+    let breakTime = 2;
+    let isSession = true;
+    let isRunning = false;
+    let timer;
+
+    const display = document.querySelector('.display');
+    const sessionDisplay = document.querySelector('.session h3');
+    const breakDisplay = document.querySelector('.break h3');
+    const startPauseButton = document.querySelector('.start-pause');
+    const resetButton = document.querySelector('.reset');
+    const sessionIncrementButton = document.querySelector('.session-increment');
+    const sessionDecrementButton = document.querySelector('.session-decrement');
+    const breakIncrementButton = document.querySelector('.break-increment');
+    const breakDecrementButton = document.querySelector('.break-decrement');
+
+    function updateDisplay() {
+      display.textContent = `${sessionTime < 10 ? '0' : ''}${sessionTime}:00`;
+      sessionDisplay.textContent = `${sessionTime} min`;
+      breakDisplay.textContent = `${breakTime} min`;
+    }
+
+    function toggleTimer() {
+      if (isRunning) {
+        clearInterval(timer);
+        startPauseButton.textContent = 'Start';
+      } else {
+        startPauseButton.textContent = 'Pause';
+        timer = setInterval(countdown, 1000);
+      }
+      isRunning = !isRunning;
+    }
+
+    function countdown() {
+      let [minutes, seconds] = display.textContent.split(':').map(Number);
+      if (seconds === 0) {
+        if (minutes === 0) {
+          isSession = !isSession;
+          minutes = isSession ? sessionTime : breakTime;
+          changeBorderColor();
+        } else {
+          minutes--;
+          seconds = 59;
+        }
+      } else {
+        seconds--;
+      }
+      display.textContent = `${minutes < 10 ? '0' : ''}${minutes}:${seconds < 10 ? '0' : ''}${seconds}`;
+    }
+
+    function resetTimer() {
+      clearInterval(timer);
+      isRunning = false;
+      isSession = true;
+      sessionTime = 20;
+      breakTime = 2;
+      startPauseButton.textContent = 'Start';
+      updateDisplay();
+      resetBorderColor();
+    }
+
+    function changeSessionTime(amount) {
+      sessionTime = Math.max(1, sessionTime + amount);
+      updateDisplay();
+    }
+
+    function changeBreakTime(amount) {
+      breakTime = Math.max(1, breakTime + amount);
+      updateDisplay();
+    }
+
+    function changeBorderColor() {
+      if (isSession) {
+        display.style.borderColor = 'skyblue';
+      } else {
+        display.style.borderColor = 'lightgreen';
+      }
+    }
+
+    function resetBorderColor() {
+      display.style.borderColor = 'skyblue';
+    }
+
+    startPauseButton.addEventListener('click', toggleTimer);
+    resetButton.addEventListener('click', resetTimer);
+    sessionIncrementButton.addEventListener('click', () => changeSessionTime(1));
+    sessionDecrementButton.addEventListener('click', () => changeSessionTime(-1));
+    breakIncrementButton.addEventListener('click', () => changeBreakTime(1));
+    breakDecrementButton.addEventListener('click', () => changeBreakTime(-1));
+
+    updateDisplay();
+  </script>
+</body>
+</html>

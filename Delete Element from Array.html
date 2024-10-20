@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Delete Element from Array</title>
+</head>
+<body>
+
+<div id="inputArea">
+  <input type="text" id="elementTxt" placeholder="Enter element to delete">
+  <button id="btnDelete" onclick="deleteArray()">Delete Element</button>
+</div>
+
+<h2 id="arrayDisplay">Current Array: </h2>
+
+<script>
+// Assuming you have an existing array named numberArray
+let numberArray = [1, 2, 3, 4, 5];
+
+function deleteArray() {
+  // Get the element to delete from the input field
+  const elementToDelete = document.getElementById('elementTxt').value;
+
+  // Remove all occurrences of the element from the array
+  numberArray = numberArray.filter(item => item!= parseInt(elementToDelete));
+
+  // Update the display
+   updateArrayDisplay();
+}
+
+function updateArrayDisplay() {
+  // Update the content of the H2 element to display the current state of the array
+  document.getElementById('arrayDisplay').textContent = 'Current Array: ' + numberArray.join(', ');
+}
+updateArrayDisplay();
+</script>
+</body>
+</html> 
+
+

@@ -1,0 +1,32 @@
+[
+  {
+    "title": "A Tale of Two Cities",
+    "author": "Charles Dickens",
+    "year": 1859,
+    "issued": "No"
+  },
+  {
+    "title": "The Great Gatsby",
+    "author": "F. Scott Fitzgerald",
+    "year": 1925,
+    "issued": "Yes"
+  },
+  {
+    "title": "Moby Dick",
+    "author": "Herman Melville",
+    "year": 1851,
+    "issued": "No"
+  },
+  {
+    "title": "Pride and Prejudice",
+    "author": "Jane Austen",
+    "year": 1813,
+    "issued": "Yes"
+  },
+  {
+    "title": "Adventures of Sherlock Holmes",
+    "author": "Arthur Conan Doyle",
+    "year": 1892,
+    "issued": "No"
+  }
+]

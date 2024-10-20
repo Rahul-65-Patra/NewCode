@@ -1,0 +1,7 @@
+[
+    { "name": "T-shirt", "category": "fashion" },
+    { "name": "Jeans", "category": "fashion" },
+    { "name": "Sneakers", "category": "fashion" },
+    { "name": "Smartphone", "category": "electronics" },
+    { "name": "Laptop", "category": "electronics" }
+]

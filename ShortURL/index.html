@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Short URL Generator</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+      background-color: #f5f5f5;
+    }
+    .container {
+      text-align: center;
+      background-color: white;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+    input {
+      padding: 10px;
+      width: 300px;
+      margin-bottom: 10px;
+    }
+    button {
+      padding: 10px 20px;
+      background-color: #007bff;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+    button:hover {
+      background-color: #0056b3;
+    }
+    .result {
+      margin-top: 20px;
+      font-size: 18px;
+      color: green;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <h2>Short URL Generator</h2>
+    <input type="text" id="longUrl" placeholder="Enter your long URL">
+    <br>
+    <button onclick="generateShortUrl()">Generate Short URL</button>
+    <div class="result" id="shortUrlResult"></div>
+  </div>
+
+  <script>
+    function generateShortUrl() {
+      const longUrl = document.getElementById('longUrl').value;
+
+      if (!longUrl) {
+        alert("Please enter a valid URL");
+        return;
+      }
+
+      const shortKey = Math.random().toString(36).substring(2, 8);
+      const shortUrl = `https://short.url/${shortKey}`; 
+
+      document.getElementById('shortUrlResult').innerHTML = `Short URL: <a href="${shortUrl}" target="_blank">${shortUrl}</a>`;
+    }
+  </script>
+
+</body>
+</html>

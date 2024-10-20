@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <table border="1" style="border-collapse: collapse">
+    <thead>
+      <tr>
+        <td>Id</td>
+        <td>Email</td>
+        <td>First_name</td>
+        <td>Last_name</td>
+        <td>Avatar</td>
+      </tr>
+    </thead>
+    <tbody id="userDate"></tbody>
+  </table>
+
+  <script>
+    async function newData() {
+      let response = await fetch('https://reqres.in/api/users?page=2');
+      let value = await response.json();
+      console.log(value);
+
+      const userDataHtml = value.data.map((item) =>    // "data" is a object key name
+        `<tr>
+          <td>${item.id}</td>
+          <td>${item.email}</td>
+            <td>${item.first_name}</td>
+          <td>${item.last_name}</td>
+        
+          <td><img src="${item.avatar}" alt="${item.first_name}'s avatar" /></td>
+        </tr>`
+      ).join("");
+      
+      document.querySelector('#userDate').innerHTML = userDataHtml;
+    }
+    newData();
+
+ 
+  </script>
+</body>
+</html>

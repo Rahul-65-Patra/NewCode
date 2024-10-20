@@ -1,0 +1,32 @@
+[
+  {
+      "name": "Complete homework",
+      "isCompleted": false,
+      "taskId": 1,
+      "userId": 101
+  },
+  {
+      "name": "Read a book",
+      "isCompleted": true,
+      "taskId": 2,
+      "userId": 102
+  },
+  {
+      "name": "Prepare for presentation",
+      "isCompleted": false,
+      "taskId": 3,
+      "userId": 103
+  },
+  {
+    "name": "Read a book",
+    "isCompleted": true,
+    "taskId": 2,
+    "userId": 102
+},
+  {
+      "name": "Go for a walk",
+      "isCompleted": true,
+      "taskId": 4,
+      "userId": 104
+  }
+]
