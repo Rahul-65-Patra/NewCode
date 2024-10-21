@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cart Page</title>
+</head>
+<body>
+    <h1>Shopping Cart</h1>
+    <div id="cart-container"></div>
+    <div id="empty-cart-message" style="display: none;">Cart is empty</div>
+
+    <script>
+        async function fetchCart() {
+            const response = await fetch('http://localhost:3000/cart');
+            const cartItems = await response.json();
+            displayCart(cartItems);
+        }
+
+        function displayCart(cartItems) {
+            const cartContainer = document.getElementById('cart-container');
+            cartContainer.innerHTML = '';
+
+            if (cartItems.length === 0) {
+                document.getElementById('empty-cart-message').style.display = 'block';
+                return;
+            } else {
+                document.getElementById('empty-cart-message').style.display = 'none';
+            }
+
+            cartItems.forEach(item => {
+                const itemDiv = document.createElement('div');
+                itemDiv.innerHTML = `
+                    <h3>${item.productname}</h3>
+                    <p>Price: $${item.price}</p>
+                    <p>Quantity: <button onclick="updateQuantity('${item._id}', -1)">-</button> ${item.qty} <button onclick="updateQuantity('${item._id}', 1)">+</button></p>
+                    <p>Net Price: $${item.netprice}</p>
+                    <button onclick="removeItem('${item._id}')">Remove</button>
+                    <hr>
+                `;
+                cartContainer.appendChild(itemDiv);
+            });
+        }
+
+        async function removeItem(id) {
+            await fetch(`http://localhost:3000/cart/${id}`, { method: 'DELETE' });
+            fetchCart(); 
+        }
+
+        async function updateQuantity(id, change) {
+            const response = await fetch(`http://localhost:3000/cart/${id}`);
+            const item = await response.json();
+            let newQty = item.qty + change;
+
+            if (newQty < 0) newQty = 0;
+
+            await fetch(`http://localhost:3000/cart/${id}`, {
+                method: 'PUT',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ qty: newQty }),
+            });
+
+            fetchCart(); 
+        }
+        fetchCart();
+    </script>
+</body>
+</html>

@@ -1,0 +1,14 @@
+[
+  {
+      "productname": "Product 1",
+      "price": 10.00,
+      "qty": 2,
+      "netprice": 20.00
+  },
+  {
+      "productname": "Product 2",
+      "price": 20.00,
+      "qty": 1,
+      "netprice": 20.00
+  }
+]

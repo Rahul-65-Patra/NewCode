@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your Cart</title>
+</head>
+<body>
+    <h1>Your Cart</h1>
+    <% if (carts.length === 0) { %>
+        <p>Cart is empty</p>
+    <% } else { %>
+        <ul>
+            <% carts.forEach(item => { %>
+                <li>
+                    <h2><%= item.productName %></h2>
+                    <p>Price: $<%= item.price %></p>
+                    <p>Quantity: <%= item.qty %></p>
+                    <p>Net Price: $<%= item.netPrice %></p>
+                </li>
+            <% }) %>
+        </ul>
+        <h3>Total Amount: $<%= totalAmount %></h3>
+    <% } %>
+    <a href="/">Continue Shopping</a>
+</body>
+</html>
